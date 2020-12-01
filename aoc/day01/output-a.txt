@@ -1,0 +1,4 @@
+
+numbers: 1236,784
+output : 969024
+time   : 4ms

@@ -1,0 +1,4 @@
+
+numbers: 1065,368,587
+output : 230057040
+time   : 311ms
