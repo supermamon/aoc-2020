@@ -18,11 +18,13 @@ let valid = input
                         kva = kv.split(':')
                         return {k:kva[0],v:kva[1]}
                       })
-                      .filter( kv => kv.k != 'cid' )
+                      .filter( kv => kv.k != 'cid' )  
+                      .filter( kv => /^(byr|iyr|eyr|hgt|hcl|ecl|pid)$/.test(kv.k) )
               
-              return j.length == 7  
+              return j.length == 7
             
             })
+
             
 const output = valid.length
 

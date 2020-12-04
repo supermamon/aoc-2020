@@ -8,22 +8,28 @@ const input = (await aoc.getInput(day))
 const start = new Date().getTime()
 //------------------------------------
 
-const valid = input.split("\n\n")
+const valid = 
+input
+.split("\n\n")
 .map( r => r.replace(/\n/g," ") )
 .filter( (r,i) => {
 
-    let j = r.split(' ')
-  .map( kv => {
-    kva = kv.split(':')
-    return {k:kva[0],v:kva[1]}
-  })
-  .filter( kv => kv.k != 'cid' )
+  let j = r.split(' ')
+    .map( kv => {
+       kva = kv.split(':')
+       return {k:kva[0],v:kva[1]}
+    })
+    .filter( kv => kv.k != 'cid' )
+    //.filter( kv => /^(byr|iyr|eyr|hgt|hcl|ecl|pid)$/.test(kv.k) )
   
+  // no matter what the keys are, if they are less than 7
+  // it would be an invalid record
   if (j.length < 7 ) return false;
  
-  // range checker
+  // ** rule engine ** 
+  // range check function
   const rge = (v,s,e) => { v=parseInt(v); return (v>=s && v<=e) }
-   
+  
   const rules={
     byr: v => rge(v,1920,2002),
     iyr: v => rge(v,2010,2020),
@@ -51,7 +57,7 @@ const valid = input.split("\n\n")
     cid: v => true    
   }
   
-  const checks = j.map( kv => rules[kv.k](kv.v) )
+  const checks = j.map( kv => rules[kv.k] ? rules[kv.k](kv.v) : false )
   return checks.reduce( (a,c) => a && c )
 
 })
