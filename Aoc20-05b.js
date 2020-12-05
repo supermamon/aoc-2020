@@ -43,8 +43,15 @@ const seatIds = passes.map( pass => {
   return row * 8 + col  
 })
 
+
+// after a review, the seatId could just have been calculated 
+// in a binary to decimal conversion.
+// const seatIds = passes.map( p => parseInt(p.replace(/[FL]/g,0).replace(/[BR]/g,1),2))
+
+
+
 // why do I have to add custom sort with integers?
-const sorted = seatIds.sort((a, b) => a - b )
+const sorted = seatIds.sort( (a, b) => a - b )
 
 const missing = sorted.filter( (id,i) => {
 

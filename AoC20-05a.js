@@ -8,10 +8,10 @@ const input = (await aoc.getInput(day))
 const start = new Date().getTime()
 //------------------------------------
 
+
 const passes = input.split("\n")
 
 function findBinaryEnd(path, start, end) {
-  //log(`path == ${path} start == ${start} end == ${end}`)
 
   if (!path) return start
   
@@ -30,9 +30,9 @@ function findBinaryEnd(path, start, end) {
   return findBinaryEnd(path.split('').slice(1).join(''), newStart, newEnd)
 }
 
-const seatIds = passes.map( pass => {
-  
-  let [match, rowPath, colPath] = pass.match(/^(.{7})(.{3})/)  
+const seatIds = passes.map( pass => {  
+
+    let [match, rowPath, colPath] = pass.match(/^(.{7})(.{3})/)  
   
   rowPath = rowPath.replace(/F/g,0).replace(/B/g,1)
   colPath = colPath.replace(/L/g,0).replace(/R/g,1)
@@ -42,6 +42,11 @@ const seatIds = passes.map( pass => {
   
   return row * 8 + col  
 })
+
+
+// after a review, the seatId could just have been calculated 
+// in a binary to decimal conversion.
+// const seatIds = passes.map( p => parseInt(p.replace(/[FL]/g,0).replace(/[BR]/g,1),2))
 
 
 const output = Math.max(...seatIds)
